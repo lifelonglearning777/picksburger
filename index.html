@@ -498,6 +498,31 @@ body{
   width:100%!important;
 }
 
+
+/* ===== v24 PLAY CLEANUP ===== */
+#playWorkMask{position:absolute;z-index:2;left:7.5%;right:3%;top:18%;bottom:12.7%;border-radius:16px;background:linear-gradient(180deg,rgba(18,8,3,.92) 0 8%,rgba(7,22,31,.97) 8% 70%,rgba(81,34,12,.98) 70% 100%);box-shadow:inset 0 1px rgba(255,255,255,.05),0 12px 28px #0006}
+#promptMask{z-index:3!important;left:25.2%!important;top:19.2%!important;width:69.2%!important;height:27.2%!important;background:linear-gradient(#fff3d7,#f5dfb8)!important;border:4px solid #6f3713!important;outline:2px solid #e7a73a!important;box-shadow:0 0 0 4px #271307,0 10px 24px #0008!important}
+.prompt{z-index:5!important;left:27.2%!important;top:21.2%!important;width:65.4%!important;height:21.6%!important;padding:10px 20px!important}
+#ja{font-size:17px!important;line-height:1.25!important}
+#enProgress{font-size:28px!important;line-height:1.2!important;white-space:normal!important}
+#input{z-index:8!important;left:28%!important;top:46.7%!important;width:64%!important;height:7.2%!important;background:#fff!important;box-shadow:0 5px 0 #062032,0 8px 20px #0007!important}
+#burgerStage{position:absolute;z-index:4;left:26%;right:20.5%;top:55.4%;bottom:13%;overflow:hidden;border-radius:13px;background:radial-gradient(ellipse at 50% 42%,rgba(255,191,65,.24),transparent 37%),linear-gradient(180deg,rgba(7,25,36,.96),rgba(8,19,25,.97) 72%,rgba(88,37,13,.98) 72%);border:1px solid rgba(46,124,153,.42)}
+#burgerStage::after{content:"";position:absolute;left:0;right:0;bottom:0;height:28%;background:repeating-linear-gradient(90deg,#713315 0 96px,#87401a 96px 100px);box-shadow:inset 0 10px 22px #19080099}
+#burgerStage .plate{left:50%!important;bottom:4.5%!important;width:58%!important;height:12%!important}
+#burgerStage #liveStack{left:50%!important;bottom:13%!important;transform:translateX(-50%) scale(var(--burger-scale,1))!important;transform-origin:50% 100%!important;transition:transform .22s ease!important}
+#burgerStage #liveStack img{width:235px!important;max-height:57px!important;margin-top:-16px!important}
+#burgerStage #liveStack img.egg,#burgerStage #liveStack img.onion{width:185px!important}
+#burgerStage #liveStack img.gold{width:63px!important}
+#comboMask{z-index:4!important;left:8.6%!important;top:57.2%!important;width:14.4%!important;height:17.8%!important;background:linear-gradient(#2b1230,#130b20)!important;border:2px solid #ec50dc!important}
+#hudCombo{z-index:6!important;left:9.6%!important;top:59.1%!important;width:12.4%!important}
+#rankMask{z-index:4!important;right:3.3%!important;top:56.8%!important;width:17.5%!important;height:18.8%!important;background:linear-gradient(#3a1a0a,#1b0d05)!important;border:2px solid #a66328!important}
+#nextRank{z-index:6!important;right:4.1%!important;top:58.3%!important;width:15.8%!important}
+#bottomTray{position:absolute;z-index:4;left:7.5%;right:3%;bottom:0;height:13%;background:linear-gradient(#481d0a,#250e05);border-top:2px solid #b36a2b;box-shadow:0 -10px 25px #0008}
+.toppings{z-index:6!important;left:26%!important;right:4%!important;bottom:1.3%!important;height:10.3%!important;gap:5px!important}
+.topping{background:linear-gradient(#291106,#160904)!important;border:1px solid #a8662a!important;border-radius:9px!important}
+#clearText{z-index:7!important;right:4.5%!important;bottom:3.4%!important;padding:6px 10px;border-radius:999px;background:#231006dd;border:1px solid #d38a31}
+#counterMask{display:none!important}
+
 </style>
 </head>
 <body>
@@ -506,7 +531,7 @@ body{
   <section id="home" class="screen home on"><div class="art"></div><button id="startBtn" aria-label="GRILL START"></button><button id="collectionHome" aria-label="BURGER COLLECTION"></button></section>
 
   <section id="play" class="screen play">
-    <div class="art"></div>
+    <div class="art"></div><div id="playWorkMask"></div>
     <div id="hudTimeMask" class="playMask"></div><div id="hudScoreMask" class="playMask"></div><div id="hudAccMask" class="playMask"></div><div id="promptMask" class="playMask"></div><div id="comboMask" class="playMask"></div><div id="rankMask" class="playMask"></div><div id="counterMask" class="playMask"></div>
     <div id="hudTime" class="hud"><small>GRILL TIME</small><b id="time">60</b></div>
     <div id="hudScore" class="hud"><small>SCORE</small><b id="score">0</b></div>
@@ -515,8 +540,8 @@ body{
     <input id="input" autocomplete="off" spellcheck="false" autocapitalize="off">
     <div id="hudCombo" class="hud"><small>COMBO</small><b id="combo">0</b></div>
     <div id="nextRank"><small>NEXT RANK</small><b id="nextRankName">CHEESE</b><div class="mini" id="nextRankGoal">5 CLEARS</div></div>
-    <div class="plate"></div><div id="liveStack" class="stack"></div>
-    <div class="toppings" id="toppings"></div><div id="clearText">CLEAR 0 / 11</div>
+    <div id="burgerStage"><div class="plate"></div><div id="liveStack" class="stack"></div></div>
+    <div id="bottomTray"></div><div class="toppings" id="toppings"></div><div id="clearText">CLEAR 0 / 11</div>
     <div id="rankFx"><div class="shade"></div><div class="title"></div></div>
   </section>
 
@@ -587,6 +612,11 @@ function layers(final=false){
 }
 function renderStack(sel,animate=false,final=false){
  const e=$(sel);e.innerHTML="";const arr=layers(final);
+ if(sel==="#liveStack"){
+   const n=arr.length;
+   const scale=n>=11?.70:n>=10?.74:n>=9?.78:n>=8?.82:n>=7?.87:n>=6?.92:1;
+   document.documentElement.style.setProperty("--burger-scale",scale);
+ }
  arr.forEach((n,i)=>{if(!ASSETS[n])return;const x=im(n);if(animate&&i===arr.length-1)x.classList.add("drop");e.appendChild(x);});
 }
 function nextQuestion(){
