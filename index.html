@@ -668,11 +668,63 @@ body{display:grid;place-items:center}
 @keyframes legendWords{0%,28%{opacity:0;transform:translate(-50%,-50%) scale(.48)}47%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}73%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-66%) scale(.96)}}
 @keyframes legendPick{0%,38%{opacity:0;transform:translate(-50%,-120px) rotate(-12deg) scale(1.2)}54%{opacity:1}76%{opacity:1;transform:translate(-50%,245px) rotate(0) scale(1)}100%{opacity:0;transform:translate(-50%,275px) scale(.92)}}
 
+
+/* ===== v19 START FIX ===== */
+#startBtn{
+  position:absolute!important;
+  z-index:45!important;
+  left:50%!important;
+  top:auto!important;
+  bottom:15.5%!important;
+  transform:translateX(-50%)!important;
+  width:320px!important;
+  height:64px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:10px!important;
+  border:3px solid #fff0a2!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg,#ffe96c 0%,#ffc02d 55%,#e97800 100%)!important;
+  color:#492400!important;
+  font-size:25px!important;
+  font-weight:1000!important;
+  letter-spacing:.01em!important;
+  text-shadow:0 1px #fff8a8!important;
+  box-shadow:0 7px 0 #8c3c00,0 0 26px #ffb52b77,0 10px 28px #0009!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+#startBtn .playIcon{
+  display:grid;place-items:center;
+  width:34px;height:34px;
+  border-radius:7px;
+  background:#3e6f91;
+  color:#fff;
+  font-size:17px;
+  text-shadow:none;
+  box-shadow:inset 0 1px #ffffff66;
+}
+#startBtn:hover{filter:brightness(1.08)}
+#startBtn:active{
+  transform:translateX(-50%) translateY(5px)!important;
+  box-shadow:0 2px 0 #8c3c00,0 0 18px #ffb52b66!important
+}
+@media(max-width:700px){
+  #startBtn{
+    width:min(72vw,320px)!important;
+    height:58px!important;
+    bottom:14%!important;
+    font-size:21px!important
+  }
+}
+
 </style></head><body>
 <div id="game"><div class="art"></div>
 <div id="timeMask" class="mask"></div><div id="scoreMask" class="mask"></div><div id="accMask" class="mask"></div><div id="comboMask" class="mask"></div>
 <div id="timeHud" class="hud"><small>GRILL TIME</small><b>60:00</b></div><div id="scoreHud" class="hud"><small>SCORE</small><b>0</b></div><div id="accHud" class="hud"><small>ACCURACY</small><b>--%</b></div><div id="comboHud" class="hud"><small>COMBO</small><b>0</b></div>
-<button id="startBtn" aria-label="GRILL START"></button><button id="collectionBtn">🍔 BURGER COLLECTION</button>
+<button id="startBtn" type="button" aria-label="GRILL START"><span class="playIcon">▶</span> GRILL START!</button><button id="collectionBtn">🍔 BURGER COLLECTION</button>
 <div id="play"><div class="playBg"></div><div class="screenTag" style="position:absolute;z-index:20;left:1.8%;top:15.4%;padding:6px 11px;border-radius:7px;background:#e9a916;color:#251400;font-size:10px;font-weight:900">GAMEPLAY</div><div class="topbar"><div class="box"><small>GRILL TIME</small><b id="time">60</b><div class="heat"><i id="heat"></i></div></div><div class="box"><small>60 SECOND TYPING CHALLENGE</small><b>PICKS BURGER</b></div><div class="box"><small>SCORE</small><b id="score">0</b></div><div class="box"><small>ACCURACY</small><b id="acc">100%</b></div></div><div class="ticket"><div id="ja" class="ja"></div><div id="en" class="en"></div></div><input id="input" autocomplete="off" spellcheck="false"><div class="stage"><div class="plate"></div><div id="liveStack" class="stack"></div><div class="bonus">COMBO<b id="combo">0</b></div><div id="toast" class="toast"></div><div id="feedback"></div><div id="clearCount">CLEAR <b id="clears">0</b></div><div id="flash" class="flash"></div></div><div id="tops" class="tops"></div></div>
 
 <div id="rankFx" aria-hidden="true">
@@ -866,7 +918,7 @@ function reward(){
    feedback(sentenceWrong===0 ? "PERFECT!" : "CLEAR!", sentenceWrong===0 ? "KEEP THE STREAK" : "KEEP GOING");
  }
 }
-function start(){$("#play").classList.add("on");$("#result").classList.remove("on");remain=BALANCE.roundSeconds;score=combo=maxCombo=total=wrong=clean=clears=perfects=sentenceWrong=0;reachedRanks={cheese:false,bacon:false,deluxe:false,legend:false};tops={cheese:0,bacon:0,egg:0,onion:0,spicy:0,gold:0};queue=shuffle(QUESTIONS);playing=true;next();draw();$("#input").focus();clearInterval(timer);timer=setInterval(()=>{remain--;draw();if(remain<=0)finish()},1000)}
+function start(){$("#play").style.display="block";$("#play").classList.add("on");$("#result").classList.remove("on");remain=BALANCE.roundSeconds;score=combo=maxCombo=total=wrong=clean=clears=perfects=sentenceWrong=0;reachedRanks={cheese:false,bacon:false,deluxe:false,legend:false};tops={cheese:0,bacon:0,egg:0,onion:0,spicy:0,gold:0};queue=shuffle(QUESTIONS);playing=true;next();draw();$("#play").style.display="block";requestAnimationFrame(()=>$("#input").focus());clearInterval(timer);timer=setInterval(()=>{remain--;draw();if(remain<=0)finish()},1000)}
 
 
 let reachedRanks={cheese:false,bacon:false,deluxe:false,legend:false};
@@ -1072,5 +1124,17 @@ $("#collectionBtn").addEventListener("click",openCollection);
 $("#resultCollection").addEventListener("click",openCollection);
 $("#closeCollection").addEventListener("click",closeCollection);
 $("#collection").addEventListener("click",e=>{if(e.target===$("#collection"))closeCollection()});
-$("#startBtn").addEventListener("click",start);$("#again").addEventListener("click",start);
+
+const startButton=$("#startBtn");
+let startLock=false;
+function safeStart(ev){
+  if(ev)ev.preventDefault();
+  if(startLock)return;
+  startLock=true;
+  try{start()}finally{setTimeout(()=>startLock=false,500)}
+}
+startButton.addEventListener("click",safeStart);
+startButton.addEventListener("pointerup",safeStart);
+$("#again").addEventListener("click",start);
+
 </script></body></html>
