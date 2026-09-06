@@ -397,6 +397,9 @@ $("#input").addEventListener("input",e=>{
  }else{wrong++;sentenceWrong++;combo=0;e.target.value=v.slice(0,-1);renderProgress();
    const w=$("#inputWrap");w.classList.remove("bad");void w.offsetWidth;w.classList.add("bad");draw();}
 });
+$("#input").addEventListener("paste",e=>e.preventDefault());
+$("#input").addEventListener("drop",e=>e.preventDefault());
+$("#input").addEventListener("contextmenu",e=>e.preventDefault());
 $("#play").addEventListener("pointerdown",()=>{if(playing)setTimeout(()=>$("#input").focus(),0)});
 $("#startBtn").addEventListener("click",start);
 $("#againBtn").addEventListener("click",start);$("#nextBtn").addEventListener("click",start);
