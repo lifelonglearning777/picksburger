@@ -222,7 +222,7 @@ const DATA_FALLBACK=[{"ja": "私は彼にそのかばんをあげました。", 
 /* v34: GAS(Googleスプレッドシート)配信への切り替え口。
    ここにGASウェブアプリのURL（.../exec）を貼り付けると、次回からそちらを優先して読みに行く。
    空のままなら今まで通り sentences.json → 内蔵155問の順でフォールバックする。 */
-const SENTENCES_API_URL = "https://script.google.com/macros/s/AKfycbyoOnU9eekLW2tj0HgK8uXUCR7JHisb_8pd8gNodBvTmUgIsNIxeAx-B-IH0e0lPvCy6w/exec";
+const SENTENCES_API_URL = "https://script.google.com/macros/s/AKfycby4-eo9A5ftcBVUUN9aCd9ZZ_670iSLFOP3V2T38jr3td3kfoF9YL9Jfs6Dg9dpz0LL/exec";
 let DATA=DATA_FALLBACK;
 (function loadSentences(){
  const url=(SENTENCES_API_URL&&SENTENCES_API_URL.indexOf('http')===0)?SENTENCES_API_URL:'sentences.json';
